@@ -1,0 +1,23 @@
+package com.company;
+
+public class Count extends Thread {
+
+    @Override
+    public void run() {
+        while (!isInterrupted()) {
+            if(Main.Queue.size()>99){
+                Main.checkerStop=true;
+            }
+            else{
+                Main.checkerStop=false;
+            }
+            if(Main.Queue.size()<81){
+                Main.checkerGo=true;
+            }
+            else {
+                Main.checkerGo = false;
+            }
+        }
+    }
+}
+
