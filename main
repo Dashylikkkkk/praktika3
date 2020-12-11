@@ -1,0 +1,41 @@
+package com.company;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Main {
+    static Giver[] giver;
+    static Taker[] taker;
+    static Count counter;
+    public static volatile boolean checkerStop;
+    public static volatile boolean checkerGo;
+    public static Queue<Double> Queue = new PriorityQueue<>(200);
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Start program");
+        giver = new Giver[3];
+        taker = new Taker[2];
+        counter = new Count();
+        counter.start();
+        for(int i=0;i<3;i++){
+            giver[i] = new Giver();
+            giver[i].start();
+        }
+        for(int i=0;i<2;i++){
+            taker[i] = new Taker();
+            taker[i].start();
+        }
+        System.out.println("If you want to stop the program, press the   0   button");
+        int quit=in.nextInt();
+        if (quit==0){
+            for(int i=0;i<3;i++){
+                giver[i].interrupt();
+            }
+            counter.interrupt();
+            while (!Queue.isEmpty()) {
+            }
+            taker[0].interrupt();
+            taker[1].interrupt();
+        }
+    }
+}
