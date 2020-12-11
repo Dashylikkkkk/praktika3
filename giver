@@ -1,0 +1,17 @@
+package com.company;
+
+public class Giver extends Thread {
+
+    @Override
+    public void run(){
+        while(!(isInterrupted())) {
+            if((!Main.checkerStop) && (Main.checkerGo)) {
+                try {
+                    Thread.sleep(500);
+                    Main.Queue.add(Math.random()*100);
+                } catch (NullPointerException e){}
+                catch (InterruptedException e){break;}
+            }
+        }
+    }
+}
