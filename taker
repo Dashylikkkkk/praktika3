@@ -1,0 +1,18 @@
+package com.company;
+import java.util.Queue;
+
+public class Taker extends Thread {
+
+    @Override
+    public void run() {
+        while(!isInterrupted()) {
+            if (Main.Queue.size()>1){
+                try {
+                    System.out.println("Took "+ Main.Queue.remove());
+                    Thread.sleep(500);
+                } catch (NullPointerException e){}
+                catch (InterruptedException e){break;}
+            }
+        }
+    }
+}
